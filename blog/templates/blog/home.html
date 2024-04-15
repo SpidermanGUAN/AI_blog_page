@@ -1,0 +1,24 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+    <h2 style="margin-top: 20px; margin-bottom: 40px; color: #361af0;">Top Bolgs:</h2>
+    {% for post in posts %}
+    <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <img class="rounded-circle account-img" style="width: 80px; height: 80px" src="{{ post.author.profile.image.url }}">
+
+            <a>{{ post.author }}</a>
+            <small class="text-muted">{{ post.date_posted | date:"F d, Y" }}</small>
+          </div>
+          <!--
+          <h2><a class="article-title" href="{% url 'detail' post.id %}">{{ post.title }}</a></h2>
+          -->
+          <h2>{{ post.title }}</h2>
+          <p class="article-content">{{ post.content }}</p>
+        </div>
+      </article>
+    {% endfor %}
+{% endblock content %}
+
+

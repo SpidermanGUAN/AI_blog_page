@@ -1,0 +1,39 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section" style="margin-top: 30px;">
+    <div class="media">
+      <img class="rounded-circle account-img" style="width: 80px; height: 80px" src="{{ user.profile.image.url }}">
+      <div class="media-body">
+        <h2 class="account-heading">{{ user.username }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+      </div>
+    </div>
+    <!-- FORM HERE -->
+    <div class="uploadprofile" style="margin-top: 40px; margin-bottom: 40px;">
+    <h2>Upload Profile Picture</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image">
+        <button type="submit">Upload</button>
+    </form>
+    </div>
+    
+    <h2>Your Posts:</h2>
+        <ul>
+            {% for post in user_posts %}
+                <li>
+                    <strong>{{ post.title }}</strong>
+                    <p>{{ post.content }}</p>
+                    <p>{{ post.date_posted }}</p>
+                    <form action="{% url 'delete_post' post.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+            {% empty %}
+                <li>No posts yet.</li>
+            {% endfor %}
+        </ul>
+  </div>
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    <div class="container p-3">
+        <h3>ChatBlog Writer</h3>
+        <p>Just write down some keywords and the AI will generate a blog title and content based on your words. Our writer will help you manage your content!</p>
+        <div class="mb-3">
+            <form id="chatbot-form" method="post">
+                {% csrf_token %}
+                <label for="prompt" class="form-label"><strong>Prompt: </strong></label>
+                <textarea class="form-control" type="textarea" id="prompt" name="prompt" rows="3"></textarea>
+                <br>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+        <br>
+        <div class="mb-3">
+            <h6>Response:</h6> 
+            <div class="container border overflow-auto h-50" id="response">
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock %}
